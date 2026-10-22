@@ -14,3 +14,5 @@ async function get(path) {
 
 export const getAssignmentOptimization = () => get("/loads/optimization");
 export const getAiInsights = () => get("/loads/ai-insights");
+// Runs QAOA on the same candidates as the classical optimizer; takes ~5-15 s.
+export const getQuantumComparison = (mode = "ideal") => get(`/loads/optimization/quantum?mode=${encodeURIComponent(mode)}`);

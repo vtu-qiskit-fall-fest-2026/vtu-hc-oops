@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import Booking from "../models/Booking.js";
 import Load from "../models/Load.js";
 import Truck from "../models/Truck.js";
+import { evaluateTruckAgainstLoad } from "../services/matchingEngine.js";
 
 const isFactory = user => ["shipper", "factory"].includes(String(user?.role || "").toLowerCase());
 const idOf = user => user?._id || user?.id;
@@ -133,4 +134,42 @@ export async function submitBookingReview(req, res, next) {
     await booking.save();
     return res.json({ message: "Your review has been saved.", review: booking[field] });
   } catch (error) { return next(error); }
+}
+
+// ── Pure validation helpers (unit-tested; used by the booking flow and the optimizer) ──
+
+const BOOKABLE_LOAD_STATUSES = new Set(["Open", "Matched"]);
+
+/** Can this load still be booked on this truck/leg? Returns { valid, status?, message? }. */
+export function validateBookingCandidate(load, truck, { routeLegId = null, routeLegs = truck?.routeLegs || [] } = {}) {
+  if (!load || !truck) return { valid: false, status: 404, message: "The load or truck was not found." };
+  if (!BOOKABLE_LOAD_STATUSES.has(load.status)) {
+    return { valid: false, status: 409, message: "This load is no longer available for booking." };
+  }
+  let candidate = truck;
+  if (routeLegs.length) {
+    const leg = routeLegs.find((l) => String(l._id || "") === String(routeLegId || ""));
+    if (!leg || leg.status !== "Available") return { valid: false, status: 409, message: "This route leg is no longer available." };
+    candidate = { ...truck, routeLegs: [leg] };
+  }
+  const { eligible, rejectionReasons } = evaluateTruckAgainstLoad(load, candidate);
+  if (!eligible) return { valid: false, status: 409, message: rejectionReasons[0], reasons: rejectionReasons };
+  return { valid: true };
+}
+
+const ALLOWED_TRANSITIONS = {
+  Pending: ["Confirmed", "Rejected", "Cancelled", "Expired"],
+  Confirmed: ["In Transit", "Cancelled"],
+  Booked: ["In Transit", "Cancelled"],
+  "In Transit": ["Delivered", "Completed"],
+  Delivered: ["Completed"],
+};
+
+export function isValidStatusTransition(from, to) {
+  return (ALLOWED_TRANSITIONS[from] || []).includes(to);
+}
+
+export function isBookingExpired(booking, now = new Date()) {
+  const at = booking?.expiresAt ? new Date(booking.expiresAt).getTime() : NaN;
+  return Number.isFinite(at) && at < now.getTime();
 }

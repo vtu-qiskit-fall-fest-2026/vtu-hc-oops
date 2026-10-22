@@ -1,23 +1,13 @@
 {
-  "name": "loadsetu-backend",
-  "version": "1.0.0",
+  "name": "loadsetu",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
-  },
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "express-rate-limit": "^7.5.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.9.5",
-    "nodemailer": "^6.10.1"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.9"
+    "setup": "npm --prefix backend install && npm --prefix frontend install && node scripts/dev.mjs setup",
+    "dev": "node scripts/dev.mjs",
+    "backend": "npm --prefix backend run dev",
+    "frontend": "npm --prefix frontend run dev",
+    "quantum": "node scripts/dev.mjs quantum",
+    "test": "npm --prefix backend test && node scripts/dev.mjs pytest"
   }
 }

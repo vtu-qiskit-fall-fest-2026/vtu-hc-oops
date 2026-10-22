@@ -4,6 +4,7 @@ import { ArrowLeft, PackagePlus, RefreshCw, Truck, MapPin, CalendarDays, IndianR
 import { createLoad, getMyLoads } from "../services/loadApi.js";
 import { getMySubscription } from "../services/subscriptionApi.js";
 import { useLoadsetuLanguage } from "../hooks/useLoadsetuLanguage.js";
+import RouteMap from "./RouteMap.jsx";
 import "../factory-loads.css";
 
 const initialForm = {
@@ -48,6 +49,7 @@ export default function FactoryLoads({ onBack }) {
   const [busy, setBusy] = useState(false);
   const [loadingLoads, setLoadingLoads] = useState(false);
   const [notice, setNotice] = useState(null);
+  const [openRoute, setOpenRoute] = useState(null);
 
   const refreshLoads = useCallback(async () => {
     setLoadingLoads(true);
@@ -138,13 +140,17 @@ export default function FactoryLoads({ onBack }) {
             <label><span><CalendarDays size={14}/> {t("pickupDate")}</span><input required type="date" min={new Date().toLocaleDateString("en-CA")} value={form.pickupDate} onChange={e => update("pickupDate", e.target.value)} /></label>
             <label><span><IndianRupee size={14}/> {t("offeredPrice")}</span><input required type="number" min="0" step="1" value={form.offeredPrice} onChange={e => update("offeredPrice", e.target.value)} placeholder="e.g. 12000" /></label>
             <label className="loads-full">{t("notes")}<textarea rows={3} maxLength={1000} value={form.notes} onChange={e => update("notes", e.target.value)} placeholder={t("notesPlaceholder")} /></label>
+            <div className="loads-full loads-route-preview">
+              <span className="loads-route-label"><MapPin size={14}/> Route preview</span>
+              <RouteMap from={form.pickup} to={form.destination} height={240} />
+            </div>
           </div>
           <div className="loads-form-footer"><p>{t("reviewBeforeSave")}</p><button className="loads-submit" disabled={busy} type="submit">{busy ? t("savingLoad") : t("saveLoad")}<ArrowLeft className="loads-submit-arrow" size={17}/></button></div>
         </form>
       ) : (
         <section className="my-loads">
           <div className="my-loads-heading"><div><h2>My Loads</h2><p>{t("loadsPostedByFactory")}</p></div><span>{loads.length} total</span></div>
-          {loadingLoads ? <div className="loads-empty">{t("loadingLoads")}</div> : loads.length === 0 ? <div className="loads-empty"><PackagePlus size={30}/><h3>{t("noLoads")}</h3><p>{t("firstLoad")}</p><button type="button" className="loads-submit" onClick={() => { setTab("create"); if (location.search) navigate("/factory/loads", { replace: true }); }}>{t("firstLoad")}</button></div> : <div className="loads-list">{loads.map(load => <article className="load-item" key={load._id}><div className="load-item-top"><div><p className="load-item-id">LOAD-{String(load._id).slice(-6).toUpperCase()}</p><h3>{load.title}</h3></div><span className={`load-status ${String(load.status).toLowerCase().replaceAll(" ", "-")}`}>{load.status}</span></div><div className="load-route"><span>{load.pickup}</span><span className="route-arrow">→</span><span>{load.destination}</span></div><div className="load-meta"><span><Truck size={15}/>{load.weightTonnes} tonnes · {load.truckType}</span><span><CalendarDays size={15}/>{dateText(load.pickupDate)}</span><strong>{money(load.offeredPrice)}</strong></div><p className="load-material">{t("goods")}: {load.material}</p>{load.notes && <p className="load-notes">{load.notes}</p>}</article>)}</div>}
+          {loadingLoads ? <div className="loads-empty">{t("loadingLoads")}</div> : loads.length === 0 ? <div className="loads-empty"><PackagePlus size={30}/><h3>{t("noLoads")}</h3><p>{t("firstLoad")}</p><button type="button" className="loads-submit" onClick={() => { setTab("create"); if (location.search) navigate("/factory/loads", { replace: true }); }}>{t("firstLoad")}</button></div> : <div className="loads-list">{loads.map(load => <article className="load-item" key={load._id}><div className="load-item-top"><div><p className="load-item-id">LOAD-{String(load._id).slice(-6).toUpperCase()}</p><h3>{load.title}</h3></div><span className={`load-status ${String(load.status).toLowerCase().replaceAll(" ", "-")}`}>{load.status}</span></div><div className="load-route"><span>{load.pickup}</span><span className="route-arrow">→</span><span>{load.destination}</span></div><div className="load-meta"><span><Truck size={15}/>{load.weightTonnes} tonnes · {load.truckType}</span><span><CalendarDays size={15}/>{dateText(load.pickupDate)}</span><strong>{money(load.offeredPrice)}</strong></div><p className="load-material">{t("goods")}: {load.material}</p>{load.notes && <p className="load-notes">{load.notes}</p>}<button type="button" className="load-route-toggle" onClick={() => setOpenRoute(openRoute === load._id ? null : load._id)}><MapPin size={14}/>{openRoute === load._id ? "Hide route" : "Show route & estimate"}</button>{openRoute === load._id && <RouteMap from={load.pickup} to={load.destination} height={220} compact />}</article>)}</div>}
         </section>
       )}
     </main>

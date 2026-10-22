@@ -16,6 +16,7 @@ import WorkspacePlaceholder from "./components/WorkspacePlaceholder.jsx";
 import MatchedTrucks from "./components/MatchedTrucks.jsx";
 import ConfirmBooking from "./components/ConfirmBooking.jsx";
 import CostSavings from "./components/CostSavings.jsx";
+import FleetOptimizer from "./components/FleetOptimizer.jsx";
 import BrokerDashboard from "./components/broker/BrokerDashboard.jsx";
 import TransporterDashboard from "./components/TransporterDashboard.jsx";
 import SubscriptionPage from "./components/SubscriptionPage.jsx";
@@ -197,6 +198,14 @@ function AppRoutes() {
         element={
           <Protected roles={["shipper", "factory"]}>
             <CostSavings />
+          </Protected>
+        }
+      />
+      <Route
+        path="/factory/optimizer"
+        element={
+          <Protected roles={["shipper", "factory"]}>
+            <FleetOptimizer />
           </Protected>
         }
       />

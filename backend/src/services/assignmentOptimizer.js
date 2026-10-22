@@ -213,6 +213,14 @@ export function optimizeAssignments({
       lateDeliveryPenaltyIncluded: false,
       limitation: "Delivery deadlines and late penalties are not scored because the current load schema and routing data do not provide a verified delivery ETA/deadline pair.",
     },
+    // Every eligible (load, truck) pair with its cost: the same input the QAOA solver gets,
+    // so the classical and quantum answers are for one identical problem.
+    candidates: rows.flatMap(({ load, options }) => options.map(({ loadId, truckId, routeLegId, cost, costBasis, truck }) => ({
+      loadId, truckId, routeLegId, cost, costBasis,
+      loadTitle: load.title || load.material || "Load",
+      route: `${load.pickup} → ${load.destination}`,
+      truckRegistration: truck.registrationNumber || "",
+    }))),
     runtimeMs: Number((performance.now() - startedAt).toFixed(3)),
     timedOut,
     optimal: !timedOut,

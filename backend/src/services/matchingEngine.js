@@ -12,7 +12,7 @@ function normalizeLocation(value) {
     .filter((part) => part && !STOP_WORDS.has(part));
 }
 
-function locationsMatch(left, right) {
+export function locationsMatch(left, right) {
   const a = normalizeLocation(left);
   const b = normalizeLocation(right);
   if (!a.length || !b.length) return false;
@@ -28,7 +28,102 @@ function clampScore(value, max) {
   return Math.max(0, Math.min(max, Math.round(value)));
 }
 
-export function scoreTruckForLoad(load, truck) {
+const idOf = (value) => String(value?._id || value?.id || value || "");
+const time = (value) => {
+  const t = value ? new Date(value).getTime() : NaN;
+  return Number.isFinite(t) ? t : null;
+};
+
+/** [start, end] of a load's trip; end falls back to the pickup date when no delivery date is set. */
+function loadWindow(load) {
+  const start = time(load?.pickupDate);
+  if (start === null) return null;
+  const end = time(load?.deliveryDate);
+  return [start, end !== null && end >= start ? end : start];
+}
+
+function legCovers(leg, load) {
+  return locationsMatch(load.pickup, leg.origin) && locationsMatch(load.destination, leg.destination);
+}
+
+/**
+ * Hard constraints: a truck that fails any of these is never offered for the load,
+ * however well it scores. Returns every reason, not just the first, for the UI.
+ */
+export function evaluateTruckAgainstLoad(load, truck, { conflictingAssignments = [] } = {}) {
+  const reasons = [];
+
+  if (truck?.isAvailable !== true) reasons.push("Truck is unavailable.");
+
+  const weight = Number(load?.weightTonnes);
+  const capacity = Number(truck?.capacityTonnes);
+  if (!(Number.isFinite(weight) && weight > 0)) reasons.push("Load weight is missing, so capacity cannot be checked.");
+  else if (!(Number.isFinite(capacity) && capacity >= weight)) reasons.push("Load weight exceeds truck capacity.");
+
+  const required = String(load?.truckType || "").trim().toLowerCase();
+  const actual = String(truck?.truckType || "").trim().toLowerCase();
+  if (required && required !== "any suitable truck" && actual !== required && actual !== "any suitable truck") {
+    reasons.push("Truck type does not match the requested type.");
+  }
+
+  const loadDims = load?.dimensions || {};
+  const truckDims = truck?.dimensions || {};
+  for (const dim of ["length", "width", "height"]) {
+    const need = Number(loadDims[dim]);
+    const have = Number(truckDims[dim]);
+    if (Number.isFinite(need) && need > 0 && Number.isFinite(have) && have > 0 && need > have) {
+      reasons.push(`Load ${dim} (${need} m) exceeds the truck's ${dim} (${have} m).`);
+    }
+  }
+
+  const needed = Array.isArray(load?.requiredEquipment) ? load.requiredEquipment : [];
+  const fitted = new Set((Array.isArray(truck?.equipment) ? truck.equipment : []).map((e) => String(e).toLowerCase()));
+  const missing = needed.filter((e) => !fitted.has(String(e).toLowerCase()));
+  if (missing.length) reasons.push(`Truck lacks required equipment: ${missing.join(", ")}.`);
+
+  // Route: a truck with route legs is bound by them; otherwise its service areas must
+  // cover both ends. Being near the pickup is not enough to promise the delivery.
+  const legs = Array.isArray(truck?.routeLegs) ? truck.routeLegs : [];
+  let coveringLeg = null;
+  if (legs.length > 0) {
+    const open = legs.filter((leg) => leg.status === "Available");
+    if (open.length === 0) reasons.push("No truck route leg is currently marked available.");
+    else {
+      coveringLeg = open.find((leg) => legCovers(leg, load)) || null;
+      if (!coveringLeg) reasons.push("No available route leg runs from the pickup to the destination.");
+    }
+  } else {
+    const areas = Array.isArray(truck?.serviceAreas) ? truck.serviceAreas : [];
+    const covered = areas.some((a) => locationsMatch(load?.pickup, a)) && areas.some((a) => locationsMatch(load?.destination, a));
+    if (!covered) reasons.push("No registered route or service-area covers both the pickup and the destination.");
+  }
+
+  const window = loadWindow(load);
+  const from = time(coveringLeg?.availableFrom);
+  if (window && from !== null && from > window[1]) {
+    reasons.push("Truck availability starts after the load's pickup/delivery window.");
+  }
+
+  // Another assignment of the same truck blocks this one unless both time windows are
+  // known and do not overlap.
+  const truckId = idOf(truck);
+  for (const assignment of conflictingAssignments) {
+    if (!truckId || idOf(assignment?.truck) !== truckId) continue;
+    const other = loadWindow(assignment.load);
+    if (!window || !other) {
+      reasons.push("Truck already has an active assignment with an unknown time window.");
+      break;
+    }
+    if (window[0] <= other[1] && other[0] <= window[1]) {
+      reasons.push("Truck is already assigned during this load's time window.");
+      break;
+    }
+  }
+
+  return { eligible: reasons.length === 0, rejectionReasons: reasons };
+}
+
+export function scoreTruckForLoad(load, truck, options = {}) {
   const serviceAreas = Array.isArray(truck.serviceAreas) ? truck.serviceAreas : [];
   const pickupCovered = serviceAreas.some((area) => locationsMatch(load.pickup, area));
   const destinationCovered = serviceAreas.some((area) => locationsMatch(load.destination, area));
@@ -96,8 +191,11 @@ export function scoreTruckForLoad(load, truck) {
     available ? "Truck is marked available" : "Truck is not available",
   ];
 
+  const { eligible, rejectionReasons } = evaluateTruckAgainstLoad(load, truck, options);
   return {
     ...truck,
+    isEligible: eligible,
+    rejectionReasons,
     matchScore,
     matchBand: matchScore >= 80 && priceFit !== false ? "Strong" : matchScore >= 65 ? "Good" : matchScore >= 50 ? "Partial" : "Weak",
     routeFit: routeCoverage === "full",
@@ -110,9 +208,9 @@ export function scoreTruckForLoad(load, truck) {
   };
 }
 
-export function matchTrucksToLoad(load, trucks) {
+export function matchTrucksToLoad(load, trucks, options = {}) {
   return trucks
-    .map((truck) => scoreTruckForLoad(load, truck))
-    .filter((truck) => truck.isAvailable && truck.capacityFit && (truck.routeCoverage !== "none" || truck.typeFit))
+    .map((truck) => scoreTruckForLoad(load, truck, options))
+    .filter((truck) => truck.isEligible)
     .sort((a, b) => b.matchScore - a.matchScore || (a.quotedPrice ?? Number.MAX_SAFE_INTEGER) - (b.quotedPrice ?? Number.MAX_SAFE_INTEGER));
 }

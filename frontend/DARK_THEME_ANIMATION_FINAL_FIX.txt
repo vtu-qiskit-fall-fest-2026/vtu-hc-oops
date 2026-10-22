@@ -1,9 +1,0 @@
-LOADSETU dark theme animation fix
-
-This update addresses two causes: an existing CSS rule disabled the broker ambient animation and transporter ambient animation, and the role scene needed explicit root-level stacking to remain visible behind dashboard content.
-
-Updated files:
-- frontend/src/styles.css
-- frontend/src/components/RoleBackground.css
-
-Replace these files in your project, restart the Vite dev server, and hard refresh (Ctrl+Shift+R). The existing login/signup animation is not modified.

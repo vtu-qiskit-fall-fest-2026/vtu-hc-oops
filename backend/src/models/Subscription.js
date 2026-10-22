@@ -8,7 +8,9 @@ const subscriptionSchema = new mongoose.Schema({
   currency: { type: String, enum: ["INR"], default: "INR" },
   durationMonths: { type: Number, required: true },
   razorpayOrderId: { type: String, required: true, unique: true, index: true },
-  razorpayPaymentId: { type: String, default: null, unique: true, sparse: true, index: true },
+  // No default: a sparse unique index still indexes explicit nulls, so a null default made the
+  // second unpaid subscription fail with a duplicate-key error. Absent until payment succeeds.
+  razorpayPaymentId: { type: String, unique: true, sparse: true, index: true },
   paymentStatus: { type: String, enum: ["PENDING", "SUCCESS", "FAILED"], default: "PENDING", index: true },
   subscriptionStatus: { type: String, enum: ["PENDING", "ACTIVE", "EXPIRED", "FAILED"], default: "PENDING", index: true },
   startDate: { type: Date, default: null },

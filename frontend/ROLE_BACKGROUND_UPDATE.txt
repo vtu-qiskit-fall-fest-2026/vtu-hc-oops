@@ -1,3 +1,0 @@
-LOADSETU background animation update
-
-RoleBackground.jsx and RoleBackground.css add fixed, animated scenes behind role dashboards and feature routes. Factory uses conveyor/package/factory motion, transporter uses trucks/road/routes, broker uses animated load-match network. Login/signup route is intentionally left without this background. main.jsx mounts the background behind routes and adds a short route-entry transition. Existing RoleMotion component is untouched.

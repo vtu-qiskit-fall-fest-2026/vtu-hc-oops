@@ -1,0 +1,74 @@
+/* Same teal + amber palette as the Cost & Savings page. */
+.fleet-opt {
+  --fo-bg: #092728; --fo-card: #0e3032; --fo-card-2: #143638; --fo-border: #245052;
+  --fo-text: #f2f5ef; --fo-muted: #a9c0bf; --fo-amber: #f4a623; --fo-green: #42c58a; --fo-red: #ef8a7a;
+  min-height: 100vh; padding: 0 3.8% 40px; color: var(--fo-text);
+  background: radial-gradient(ellipse at 80% 0%, #6b6a2b30, transparent 30%), linear-gradient(135deg, #0b292a, #092526 70%, #092b2c);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 13.5px;
+}
+.fleet-opt.fo-light {
+  --fo-bg: #edf3ed; --fo-card: #fff; --fo-card-2: #f4f8f3; --fo-border: #d5e3da;
+  --fo-text: #20342c; --fo-muted: #647a70; --fo-red: #b4473a;
+  background: radial-gradient(ellipse at 80% 0%, #cdbb7420, transparent 32%), #edf3ed;
+}
+.fleet-opt * { box-sizing: border-box; }
+.fo-top { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 14px; border-bottom: 1px solid var(--fo-border); }
+.fo-brand { font-weight: 900; letter-spacing: 1px; text-align: center; }
+.fo-brand small { display: block; font-size: 8px; color: var(--fo-muted); }
+.fo-top-actions { display: flex; gap: 7px; }
+.fo-btn, .fo-icon { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--fo-border); border-radius: 10px; background: var(--fo-card-2); color: var(--fo-text); padding: 9px 13px; font: inherit; cursor: pointer; }
+.fo-icon { padding: 9px; }
+.fo-icon.on { background: var(--fo-amber); color: #152a28; }
+.fo-btn:disabled { opacity: .6; cursor: wait; }
+.fo-heading { padding: 26px 0 20px; max-width: 760px; }
+.fo-eyebrow { display: inline-flex; align-items: center; gap: 5px; color: var(--fo-amber); font-size: 10.5px; font-weight: 900; letter-spacing: 2px; }
+.fo-heading h1 { margin: 6px 0; font-size: clamp(26px, 2.4vw, 36px); letter-spacing: -1px; }
+.fo-heading p { margin: 0; color: var(--fo-muted); line-height: 1.6; }
+.fo-panel { background: var(--fo-card); border: 1px solid var(--fo-border); border-radius: 16px; padding: 18px; margin-bottom: 16px; }
+.fo-panel h2 { margin: 0 0 12px; font-size: 17px; }
+.fo-panel h3 { margin: 18px 0 8px; font-size: 14px; }
+.fo-muted { color: var(--fo-muted); }
+.fo-error { color: var(--fo-red); border: 1px solid currentColor; border-radius: 10px; padding: 10px 12px; }
+.fo-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.fo-stat { display: flex; gap: 12px; align-items: center; background: var(--fo-card); border: 1px solid var(--fo-border); border-radius: 14px; padding: 14px; }
+.fo-stat-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 11px; background: #f4a62322; color: var(--fo-amber); flex: none; }
+.fo-stat small, .fo-stat em { display: block; color: var(--fo-muted); font-style: normal; font-size: 11.5px; }
+.fo-stat strong { display: block; font-size: 20px; margin: 2px 0; }
+.fo-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 16px; }
+.fo-assign { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.fo-assign button { width: 100%; display: flex; justify-content: space-between; gap: 12px; text-align: left; padding: 12px; border-radius: 12px; border: 1px solid var(--fo-border); background: var(--fo-card-2); color: inherit; font: inherit; cursor: pointer; }
+.fo-assign button.on { border-color: var(--fo-amber); box-shadow: 0 0 0 2px #f4a62333; }
+.fo-assign small { display: block; color: var(--fo-muted); margin-top: 3px; }
+.fo-assign-right { text-align: right; }
+.fo-unassigned { margin: 0; padding-left: 18px; line-height: 1.7; color: var(--fo-muted); }
+.fo-unassigned b { color: var(--fo-text); }
+.fo-quantum-head { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+.fo-quantum-head p { color: var(--fo-muted); margin: 0; max-width: 620px; line-height: 1.6; }
+.fo-modes { display: flex; gap: 6px; align-items: flex-start; flex-wrap: wrap; }
+.fo-modes button { border: 1px solid var(--fo-border); border-radius: 10px; background: var(--fo-card-2); color: var(--fo-text); padding: 9px 12px; font: inherit; cursor: pointer; }
+.fo-modes button.on { border-color: var(--fo-amber); color: var(--fo-amber); }
+.fo-modes .fo-run { display: inline-flex; align-items: center; gap: 6px; background: var(--fo-amber); color: #152a28; border-color: var(--fo-amber); font-weight: 800; }
+.fo-modes .fo-run:disabled { opacity: .65; cursor: wait; }
+.fo-compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 16px; }
+.fo-card { border: 1px solid var(--fo-border); border-radius: 13px; padding: 13px; background: var(--fo-card-2); }
+.fo-card small { display: flex; align-items: center; gap: 5px; color: var(--fo-muted); font-size: 11.5px; }
+.fo-card strong { display: block; font-size: 21px; margin: 6px 0 3px; }
+.fo-card span { color: var(--fo-muted); font-size: 12px; }
+.fo-card.good { border-color: var(--fo-green); }
+.fo-card.warn { border-color: var(--fo-amber); }
+.fo-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin: 12px 0 0; }
+.fo-metrics div { background: var(--fo-card-2); border: 1px solid var(--fo-border); border-radius: 10px; padding: 9px 11px; }
+.fo-metrics dt { font-size: 11px; color: var(--fo-muted); }
+.fo-metrics dd { margin: 3px 0 0; font-weight: 800; font-size: 15px; }
+.fo-hist { display: grid; gap: 6px; }
+.fo-hist-row { display: grid; grid-template-columns: auto minmax(80px, 1fr) 54px; gap: 4px 10px; align-items: center; padding: 6px 8px; border-radius: 9px; }
+.fo-hist-row code { font-size: 12px; letter-spacing: .5px; }
+.fo-hist-row small { grid-column: 1 / -1; color: var(--fo-muted); font-size: 11.5px; }
+.fo-hist-bar { height: 10px; border-radius: 99px; background: var(--fo-card-2); overflow: hidden; }
+.fo-hist-bar span { display: block; height: 100%; background: var(--fo-muted); border-radius: 99px; }
+.fo-hist-row.is-optimal { background: #42c58a18; }
+.fo-hist-row.is-optimal .fo-hist-bar span { background: var(--fo-green); }
+.fo-hist-row.is-optimal small::before { content: "Optimal · "; color: var(--fo-green); font-weight: 800; }
+.fo-honest { display: flex; gap: 8px; align-items: flex-start; margin: 16px 0 0; color: var(--fo-muted); line-height: 1.6; font-size: 12.5px; }
+.fo-honest svg { flex: none; margin-top: 3px; }
+@media (max-width: 860px) { .fo-grid { grid-template-columns: 1fr; } .fo-brand small { display: none; } }

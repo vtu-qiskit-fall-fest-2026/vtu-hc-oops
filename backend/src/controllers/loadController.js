@@ -1,4 +1,5 @@
 import Load from "../models/Load.js";
+import { geocode } from "../services/routingService.js";
 
 const allowedTruckTypes = ["Any suitable truck", "Mini truck", "Pickup", "LCV", "Open truck", "Container", "Trailer", "Tipper"];
 
@@ -21,11 +22,16 @@ export async function createLoad(req, res, next) {
     if (!allowedTruckTypes.includes(truckType)) return res.status(400).json({ message: "Choose a valid truck type." });
     if (pickup.trim().toLowerCase() === destination.trim().toLowerCase()) return res.status(400).json({ message: "Pickup and destination must be different." });
 
+    // Best effort: coordinates power the route map and distance estimates. A load is
+    // still saved if a place can't be found; the map then says so.
+    const [from, to] = await Promise.all([geocode(pickup), geocode(destination)]).catch(() => [null, null]);
+    const coords = (p) => (p ? { latitude: p.lat, longitude: p.lng } : { latitude: null, longitude: null });
     const load = await Load.create({
       factory: req.user._id,
       title: title.trim(), pickup: pickup.trim(), destination: destination.trim(),
       material: material.trim(), weightTonnes: weight, truckType, pickupDate: date,
-      offeredPrice: price, notes: String(notes).trim()
+      offeredPrice: price, notes: String(notes).trim(),
+      pickupCoordinates: coords(from), deliveryCoordinates: coords(to)
     });
     return res.status(201).json({ message: "Load created successfully.", load });
   } catch (error) { next(error); }

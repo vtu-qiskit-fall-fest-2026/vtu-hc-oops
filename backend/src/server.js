@@ -11,6 +11,7 @@ import bookingRoutes from "./routes/bookingRoutes.js";
 import brokerRoutes from "./routes/brokerRoutes.js";
 import transporterRoutes from "./routes/transporterRoutes.js";
 import subscriptionRoutes from "./routes/subscriptionRoutes.js";
+import routeRoutes from "./routes/routeRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -57,6 +58,7 @@ app.use("/api/bookings", bookingRoutes);
 app.use("/api/broker", brokerRoutes);
 app.use("/api/transporter", transporterRoutes);
 app.use("/api/subscriptions", subscriptionRoutes);
+app.use("/api/routes", routeRoutes);
 
 // Handle unknown routes only after registering all API routes.
 app.use((req, res) => {

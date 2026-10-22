@@ -1,5 +1,0 @@
-// Add to backend/src/server.js imports:
-import truckRoutes from "./routes/truckRoutes.js";
-
-// Register BEFORE the 404 handler, alongside authRoutes and loadRoutes:
-app.use("/api/trucks", truckRoutes);

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Activity,
+  Atom,
   ArrowDownRight,
   ArrowRight,
   Bell,
@@ -150,6 +151,13 @@ export default function FactoryDashboard() {
       icon: WalletCards,
       path: "/factory/savings",
       tag: t("costIntelligence")
+    },
+    {
+      title: t("fleetOptimizer"),
+      desc: t("fleetOptimizerDesc"),
+      icon: Atom,
+      path: "/factory/optimizer",
+      tag: t("quantumTag")
     }
   ];
 
