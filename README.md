@@ -23,6 +23,7 @@ solved both exactly (classical) and with **QAOA on Qiskit**, side by side.
 - [The quantum part](#the-quantum-part)
 - [Results](#results)
 - [How to run](#how-to-run)
+- [Deploy](#deploy)
 - [Project structure](#project-structure)
 - [Tech stack](#tech-stack)
 - [Limitations](#limitations)
@@ -196,6 +197,13 @@ The script trains on the simulator, samples the demo circuit once on the least b
 
 ---
 
+## Deploy
+
+Vercel (frontend) → Railway (API) → Hugging Face Space (QAOA service, Docker) → MongoDB Atlas.
+Step-by-step guide, with every variable and a troubleshooting table: **[docs/DEPLOY.md](docs/DEPLOY.md)**.
+
+---
+
 ## Project structure
 
 ```text
@@ -230,7 +238,7 @@ vtu-hc-oops/
 | Frontend | React 18, Vite, React Router, Leaflet / react-leaflet, lucide-react |
 | Maps | OpenStreetMap tiles, OpenRouteService or OSRM + Nominatim |
 | Payments | Razorpay (test mode) |
-| Tests | `node:test` (28 tests), pytest (5 tests) |
+| Tests | `node:test` (28 tests), pytest (6 tests) |
 
 ---
 

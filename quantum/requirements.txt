@@ -1,0 +1,10 @@
+# Runtime for the QAOA HTTP service (also what the Docker image / Hugging Face Space installs).
+# Pinned to the versions the tests and benchmarks ran on.
+qiskit==1.4.6
+qiskit-aer==0.18.0
+qiskit-ibm-runtime==0.44.1   # FakeBrisbane noise model + real hardware runs
+numpy==2.5.4
+scipy==1.18.1
+fastapi==0.161.0
+uvicorn==0.54.0
+pydantic==2.14.1

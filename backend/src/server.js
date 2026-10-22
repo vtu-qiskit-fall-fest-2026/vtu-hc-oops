@@ -18,11 +18,18 @@ const port = process.env.PORT || 5000;
 
 app.disable("x-powered-by");
 
+// Railway (and most hosts) put one proxy in front of the app. Without this, req.ip is the
+// proxy's address, so every user shares a single rate-limit bucket. Only trusted in
+// production: locally there is no proxy and a client could fake X-Forwarded-For.
+if (process.env.NODE_ENV === "production") app.set("trust proxy", 1);
+
+// Deployed frontends (e.g. the Vercel URL) come from CLIENT_ORIGIN, comma-separated.
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "http://127.0.0.1:5173",
   "http://127.0.0.1:5174",
+  ...String(process.env.CLIENT_ORIGIN || "").split(",").map((o) => o.trim().replace(/\/$/, "")).filter(Boolean),
 ];
 
 app.use(
@@ -75,6 +82,12 @@ app.use((err, _req, res, _next) => {
   console.error("Unhandled LOADSETU API error:", err?.message || "unknown error");
   res.status(err?.status || 500).json({ message: err?.status ? err.message : "Something went wrong. Please try again." });
 });
+
+// Fail at boot, where the host's deploy log shows it, not at the first login.
+if (process.env.NODE_ENV === "production" && (process.env.JWT_SECRET || "").length < 32) {
+  console.error("JWT_SECRET must be set to a random string of at least 32 characters in production.");
+  process.exit(1);
+}
 
 connectDB()
   .then(() => {

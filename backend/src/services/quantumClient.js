@@ -17,7 +17,10 @@ export async function runQuantumComparison(candidates, {
   try {
     const res = await fetchImpl(`${baseUrl.replace(/\/$/, "")}/solve`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...(process.env.QUANTUM_SERVICE_KEY ? { "X-Quantum-Key": process.env.QUANTUM_SERVICE_KEY } : {}),
+      },
       body: JSON.stringify({
         mode,
         options: candidates.map((c) => ({ loadId: c.loadId, truckId: c.truckId, cost: c.cost })),
@@ -32,7 +35,8 @@ export async function runQuantumComparison(candidates, {
       status: "unavailable",
       reason: error?.name === "AbortError"
         ? "The quantum service took too long to answer."
-        : "The quantum service is not running. Start it with `npm run quantum` (see README).",
+        // A sleeping free-tier Space takes a minute or two to wake on the first request.
+        : "The quantum service is not reachable. If it is hosted, it may be waking up: try again in a minute. Locally, start it with `npm run quantum`.",
     };
   } finally {
     clearTimeout(timer);

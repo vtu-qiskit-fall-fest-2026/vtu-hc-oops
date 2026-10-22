@@ -4,12 +4,14 @@ Run:  uvicorn qlogistics.service:app --port 8000   (from the quantum/ folder)
 """
 from __future__ import annotations
 
+import hmac
 import json
+import os
 from pathlib import Path
 
 import qiskit
 import qiskit_aer
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, Header, HTTPException
 from pydantic import BaseModel, Field
 
 from .qaoa import MODES, solve
@@ -19,7 +21,16 @@ MAX_QUBITS = 12  # ~5 s noiseless; statevector training cost doubles per qubit
 MAX_NOISY_QUBITS = 10  # noisy simulation of the routed circuit grows much faster
 HARDWARE_RESULT = Path(__file__).resolve().parent.parent / "results" / "ibm_hardware_run.json"
 
+# Shared secret with the Node API. A public deployment (e.g. a Hugging Face Space) is
+# reachable by anyone, and each /solve burns seconds of CPU. Unset = open (local dev).
+SERVICE_KEY = os.environ.get("QUANTUM_SERVICE_KEY", "")
+
 app = FastAPI(title="LoadSetu quantum assignment service", version="1.0.0")
+
+
+def require_key(x_quantum_key: str = Header(default="")):
+    if SERVICE_KEY and not hmac.compare_digest(x_quantum_key.encode(), SERVICE_KEY.encode()):
+        raise HTTPException(401, "Missing or wrong X-Quantum-Key.")
 
 
 class OptionIn(BaseModel):
@@ -42,7 +53,7 @@ def health():
             "maxQubits": MAX_QUBITS, "modes": [m for m in MODES if m != "ibm"]}
 
 
-@app.post("/solve")
+@app.post("/solve", dependencies=[Depends(require_key)])
 def solve_endpoint(body: SolveIn):
     if body.mode not in ("ideal", "noisy"):
         # Hardware runs queue for minutes; they go through scripts/run_on_ibm.py instead.
