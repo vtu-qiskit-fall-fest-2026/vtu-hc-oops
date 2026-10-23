@@ -1,0 +1,6 @@
+LOADSETU dashboard layout + animation refresh
+- Updated RoleBackground.css for stronger, more visible factory/transporter/broker background scenes.
+- Updated styles.css for a responsive, staggered feature-card layout on the factory dashboard.
+- Login/signup scene remains excluded by RoleBackground role detection.
+- No backend behavior was changed.
+Run npm install then npm run dev from frontend. Build/test on Windows before deployment.

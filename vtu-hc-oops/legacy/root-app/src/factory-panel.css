@@ -1,0 +1,103 @@
+/* Compatibility stylesheet for the legacy FactoryPanel component. The active app
+   uses FactoryDashboard.jsx + FactoryLoads.jsx; this file prevents unresolved
+   CSS imports if the legacy component is opened during development. */
+.factory-panel { min-height: 100vh; padding: 24px; color: var(--text, #eff6f1); background: var(--background, #092829); font-family: Inter, system-ui, sans-serif; }
+.factory-panel button, .factory-panel input, .factory-panel select, .factory-panel textarea { font: inherit; }
+.factory-panel button { cursor: pointer; }
+.factory-panel .factory-card, .factory-panel .factory-kpi, .factory-panel .factory-load-card, .factory-panel .factory-match-card, .factory-panel .factory-shipment { border: 1px solid var(--border, #245153); border-radius: 12px; padding: 16px; background: var(--surface, #103335); }
+.factory-panel .factory-kpi-grid, .factory-panel .factory-load-grid, .factory-panel .factory-match-list, .factory-panel .factory-shipment-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.factory-panel .factory-form input, .factory-panel .factory-form select, .factory-panel .factory-form textarea { width: 100%; padding: 10px; border: 1px solid var(--border, #245153); border-radius: 8px; background: var(--surface, #103335); color: inherit; }
+@media (max-width: 640px) { .factory-panel { padding: 14px; } }
+
+
+.factory-tracking-section {
+  position: relative;
+  z-index: 1;
+  margin: 30px 0;
+  padding: 24px;
+  border: 1px solid var(--border-color, rgba(130, 148, 119, 0.3));
+  border-radius: 20px;
+  background: var(--card-background, rgba(130, 148, 119, 0.08));
+  color: inherit;
+}
+
+.factory-tracking-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.factory-tracking-heading h2 {
+  margin: 8px 0;
+}
+
+.factory-tracking-heading p {
+  margin-top: 8px;
+}
+
+.factory-tracking-map {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.factory-map-note {
+  margin: 12px 0 0;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+@media (max-width: 640px) {
+  .factory-tracking-section {
+    padding: 14px;
+    margin: 20px 0;
+  }
+
+  .factory-tracking-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .factory-tracking-heading button {
+    max-width: 100%;
+  }
+}
+
+/* Booking acceptance / rejection and factory-transporter contact panel */
+.factory-booking-updates {
+  position: relative;
+  z-index: 1;
+  margin: 28px 0;
+  padding: 24px;
+  border: 1px solid var(--border-color, rgba(130, 148, 119, 0.3));
+  border-radius: 20px;
+  background: var(--card-background, rgba(130, 148, 119, 0.08));
+  color: inherit;
+}
+.factory-booking-list { display: grid; gap: 12px; margin-top: 18px; }
+.factory-booking-card { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; padding: 16px; border: 1px solid var(--border-color, rgba(130, 148, 119, 0.28)); border-radius: 14px; background: rgba(130, 148, 119, 0.06); }
+.factory-booking-copy { display: grid; gap: 6px; min-width: 0; }
+.factory-booking-copy > strong { font-size: 1rem; }
+.factory-booking-copy > span { font-size: .9rem; overflow-wrap: anywhere; }
+.factory-booking-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; flex-shrink: 0; }
+.factory-booking-status { display: inline-flex; padding: 6px 10px; border-radius: 999px; font-size: .78rem; font-weight: 700; background: rgba(148, 163, 184, .18); }
+.factory-booking-status.status-pending { background: rgba(234, 179, 8, .16); }
+.factory-booking-status.status-confirmed { background: rgba(34, 197, 94, .16); }
+.factory-booking-status.status-rejected, .factory-rejection-notice { background: rgba(239, 68, 68, .12); color: #dc2626; }
+.factory-pending-notice { color: #b7791f; margin: 4px 0 0; font-size: .88rem; }
+.factory-rejection-notice { padding: 9px 11px; border-radius: 9px; margin: 5px 0 0; font-size: .88rem; }
+.factory-booking-error { color: #dc2626; margin-top: 12px; }
+.factory-booking-empty { opacity: .75; padding: 16px 0; }
+.td-reject { border: 1px solid #dc2626; color: #dc2626; background: transparent; border-radius: 10px; padding: 9px 12px; cursor: pointer; font: inherit; }
+.td-reject:disabled { opacity: .55; cursor: not-allowed; }
+.td-rejection-note { color: #dc2626; margin: 5px 0; font-size: .86rem; }
+.td-status.pending { background: rgba(234, 179, 8, .16); }
+.td-status.rejected { background: rgba(239, 68, 68, .14); color: #dc2626; }
+@media (max-width: 700px) {
+  .factory-booking-updates { padding: 14px; }
+  .factory-booking-card { flex-direction: column; }
+  .factory-booking-actions { align-items: flex-start; width: 100%; }
+}

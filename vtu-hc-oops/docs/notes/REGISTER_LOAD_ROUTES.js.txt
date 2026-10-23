@@ -1,0 +1,13 @@
+// Add these changes to your EXISTING backend/src/server.js (do not replace your current server.js blindly).
+// 1) Add with your imports:
+import loadRoutes from "./routes/loadRoutes.js";
+
+// 2) Keep CORS middleware before routes. Example for the ports you've used:
+app.use(cors({
+  origin: ["http://localhost:5173", "http://localhost:5174", "http://127.0.0.1:5173", "http://127.0.0.1:5174"],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
+// 3) Register this after express.json() and after/alongside auth routes:
+app.use("/api/loads", loadRoutes);

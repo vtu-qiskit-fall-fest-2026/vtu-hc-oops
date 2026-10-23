@@ -1,0 +1,1 @@
+Role background visibility fix: raised scene visibility, ensured it sits at z-index 0 behind route content, removed opaque backgrounds from dashboard page shells so role-specific animated scene can show through. Login route remains excluded by RoleBackground.jsx. Please run npm install and npm run dev, then hard-refresh (Ctrl+Shift+R).

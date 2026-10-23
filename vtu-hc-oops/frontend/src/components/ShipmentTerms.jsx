@@ -1,0 +1,20 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import { ArrowLeft, ShieldCheck } from "lucide-react";
+import "./ShipmentConfirmation.css";
+
+export default function ShipmentTerms() {
+  return <main className="sc-page"><header className="sc-header"><Link className="sc-back" to="/"><ArrowLeft size={16}/> Back to shipment</Link><strong>LOADSETU · Shipment Terms</strong></header><article className="sc-card sc-terms"><span className="sc-eyebrow"><ShieldCheck size={15}/> VERSION LOADSETU-SHIPMENT-TERMS-1.0</span><h1>Shipment Terms & Conditions</h1><p className="sc-muted">Please read these terms before accepting a shipment or making a payment.</p>
+    <h2>1. Review before confirming</h2><p>The Factory Owner and Transporter must each independently review the route, shipment/load details, truck details, applicable charges, and cancellation policy before accepting.</p>
+    <h2>2. Separate acceptance and payment</h2><p>Each party must accept these terms and complete their own required payment. Checking the acceptance box or opening a confirmation link is not a payment and does not confirm a shipment.</p>
+    <h2>3. Deposit and broker commission</h2><p>The commitment deposit is calculated at ₹5 per kilometre. Broker commission is a separate charge calculated at ₹3 per kilometre. Any other supported platform charge is itemized separately. The current confirmation page shows the calculation and total due for the signed-in party.</p>
+    <h2>4. Distance method</h2><p>Where no road-routing service is connected, the distance is a straight-line estimate calculated from the saved pickup and delivery latitude/longitude. It must not be interpreted as road distance. Payment is blocked until valid coordinates are saved.</p>
+    <h2>5. When a shipment is confirmed</h2><p>A shipment is confirmed only after both the Factory Owner and Transporter have accepted the current terms version and both payments have been verified by the backend with Razorpay. Pending, failed, cancelled, or merely authorized payments do not qualify.</p>
+    <h2>6. Emergency cancellation and deposit allocation</h2><p>Emergency cancellation is available only after confirmation and requires a final explicit confirmation. Under the disclosed policy, the applicable forfeited deposit is allocated 50% to the opposite party and 50% to the Broker. This allocation applies only to the deposit amount subject to forfeiture; it does not automatically forfeit the broker commission or unrelated charges.</p>
+    <h2>7. Settlement and refunds</h2><p>The current Razorpay integration verifies test payments but does not execute automated payouts. Therefore, cancellation allocations are recorded as pending settlement and must not be interpreted as money already transferred. This workflow does not promise a refund where no refund action has been verified. If the application cannot determine a special-case outcome, it records the matter for review rather than inventing a new financial rule.</p>
+    <h2>8. Load and truck availability</h2><p>After confirmed emergency cancellation, LoadSetu attempts to release the truck and reopen the load using the existing records, provided the load was not withdrawn and neither resource is assigned to another active shipment. Cancelled shipment and payment history remain available for audit.</p>
+    <h2>9. Payment and status records</h2><p>LoadSetu stores payment references, terms acceptance timestamps, shipment status changes, and cancellation allocation records. A record of allocation is not proof of payout. Only a verified backend payment result can mark a payment as paid.</p>
+    <h2>10. Contact and notifications</h2><p>Confirmation and cancellation notices use the contact information saved in LoadSetu. WhatsApp links open a pre-filled message for the user to send; they do not send automatically.</p>
+    <p className="sc-muted">Terms version: LOADSETU-SHIPMENT-TERMS-1.0</p><Link className="sc-primary" to="/">Return to confirmation</Link>
+  </article></main>;
+}

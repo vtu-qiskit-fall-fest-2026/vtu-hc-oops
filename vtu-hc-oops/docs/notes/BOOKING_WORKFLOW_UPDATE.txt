@@ -1,0 +1,12 @@
+LOADSETU booking workflow UI update
+
+Updated files:
+- src/components/FactoryDashboard.jsx
+- src/components/TransporterDashboard.jsx
+- src/components/broker/BrokerDashboard.jsx
+- src/services/transporterApi.js
+- src/factory-panel.css
+
+The factory dashboard shows booking status and transporter contact information. The transporter dashboard shows pending booking requests with Accept and Reject buttons, factory phone number, and WhatsApp contact. The broker message template has been expanded to a formal LOADSETU booking message and the create-booking notice now says it is awaiting transporter acceptance.
+
+WhatsApp only opens a pre-filled message. The user must send it from WhatsApp.

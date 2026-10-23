@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { requireAuth } from "../middleware/auth.js";
+import { createBrokerBooking, getBrokerOverview, updateBrokerBooking, updateBrokerShipment } from "../controllers/brokerController.js";
+const router = Router();
+router.use(requireAuth);
+router.get("/overview", getBrokerOverview);
+router.post("/bookings", createBrokerBooking);
+router.patch("/bookings/:bookingId", updateBrokerBooking);
+router.patch("/shipments/:loadId", updateBrokerShipment);
+export default router;

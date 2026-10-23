@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { requireAuth } from "../middleware/auth.js";
+import { requireVerified } from "../middleware/access.js";
+import { createSubscriptionOrder, failSubscriptionPayment, getMySubscription, verifySubscriptionPayment } from "../controllers/subscriptionController.js";
+const router = Router();
+router.use(requireAuth, requireVerified);
+router.get("/me", getMySubscription);
+router.post("/orders", createSubscriptionOrder);
+router.post("/verify", verifySubscriptionPayment);
+router.post("/failed", failSubscriptionPayment);
+export default router;

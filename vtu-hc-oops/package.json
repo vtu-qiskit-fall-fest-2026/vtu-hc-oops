@@ -1,0 +1,13 @@
+{
+  "name": "loadsetu",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup": "npm --prefix backend install && npm --prefix frontend install && node scripts/dev.mjs setup",
+    "dev": "node scripts/dev.mjs",
+    "backend": "npm --prefix backend run dev",
+    "frontend": "npm --prefix frontend run dev",
+    "quantum": "node scripts/dev.mjs quantum",
+    "test": "npm --prefix backend test && node scripts/dev.mjs pytest"
+  }
+}

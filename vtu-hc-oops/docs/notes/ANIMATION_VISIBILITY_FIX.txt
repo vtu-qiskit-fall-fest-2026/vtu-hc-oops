@@ -1,0 +1,1 @@
+This patch increases transporter and broker scene visibility and corrects background stacking so the scene is behind page content. Login/signup remains excluded by RoleBackground route detection. Test in browser in all three roles; existing dashboard component class names may vary and should be checked if any opaque surface still covers the scene.

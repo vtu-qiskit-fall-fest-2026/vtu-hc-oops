@@ -1,0 +1,15 @@
+# Python dependencies for quantum/ (service + notebook + tests).
+#   python -m venv quantum/.venv
+#   quantum/.venv/Scripts/pip install -r requirements.txt      (Windows)
+#   quantum/.venv/bin/pip install -r requirements.txt          (macOS/Linux)
+
+# The service itself (pinned; the Docker image installs only this file)
+-r quantum/requirements.txt
+
+# Notebook
+jupyter>=1.0
+matplotlib>=3.8
+
+# Tests
+pytest>=8.0
+httpx>=0.27   # FastAPI TestClient

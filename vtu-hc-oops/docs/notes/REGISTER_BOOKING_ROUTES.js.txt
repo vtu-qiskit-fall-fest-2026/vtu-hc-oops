@@ -1,0 +1,5 @@
+// Add alongside your other imports in backend/src/server.js:
+import bookingRoutes from "./routes/bookingRoutes.js";
+
+// Register BEFORE the 404 handler. Preserve existing routes; do not duplicate them.
+app.use("/api/bookings", bookingRoutes);

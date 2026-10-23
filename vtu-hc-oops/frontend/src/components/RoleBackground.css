@@ -1,0 +1,87 @@
+.loadsetu-scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;isolation:isolate;opacity:1;--scene:#ffb52e;--scene2:#3fe0b0}.scene-factory{--scene:#a8ef9e;--scene2:#ffc15a}.scene-transporter{--scene:#69ddff;--scene2:#ffb52e}.scene-broker{--scene:#d6a6ff;--scene2:#4de0b3}.scene-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(111,190,177,.065) 1px,transparent 1px),linear-gradient(90deg,rgba(111,190,177,.065) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(transparent,#000 15%,#000 85%,transparent);animation:scene-grid-move 24s linear infinite}.scene-orb{position:absolute;border-radius:50%;filter:blur(55px);opacity:.14;width:38vw;height:38vw;background:var(--scene);animation:scene-orb-float 12s ease-in-out infinite alternate}.orb-one{right:-12%;top:15%}.orb-two{left:-14%;bottom:-22%;background:var(--scene2);animation-delay:-5s}
+.factory-shed{position:absolute;right:12%;top:24%;width:160px;height:125px;border:2px solid var(--scene);border-bottom:0;border-radius:9px 9px 0 0;color:var(--scene);display:grid;place-items:center;background:color-mix(in srgb,var(--scene) 7%,transparent);box-shadow:0 0 45px color-mix(in srgb,var(--scene) 20%,transparent)}.factory-shed:before{content:"";position:absolute;top:-26px;left:18px;width:38px;height:26px;background:var(--scene);clip-path:polygon(0 100%,50% 0,100% 100%);opacity:.85}.shed-windows{position:absolute;bottom:0;left:12px;right:12px;display:flex;gap:7px}.shed-windows i{height:25px;flex:1;background:color-mix(in srgb,var(--scene) 45%,transparent);border:1px solid var(--scene)}.smoke{position:absolute;top:-24px;width:18px;height:18px;border-radius:50%;background:var(--scene);filter:blur(8px);animation:scene-smoke 3s ease-out infinite}.smoke-one{left:46px}.smoke-two{left:78px;animation-delay:-1.4s}.factory-belt{position:absolute;right:4%;top:47%;width:49%;height:20px;border:2px solid var(--scene);border-radius:20px;background:rgba(2,25,26,.55);display:flex;justify-content:space-around;overflow:hidden;box-shadow:0 0 22px color-mix(in srgb,var(--scene) 25%,transparent)}.factory-belt i{height:100%;width:5px;background:var(--scene);animation:scene-belt .65s linear infinite}.factory-belt i:nth-child(even){animation-delay:-.3s}.factory-box{position:absolute;top:calc(47% - 40px);color:var(--scene);filter:drop-shadow(0 0 10px var(--scene));animation:scene-box-travel 6s linear infinite}.box-one{right:42%}.box-two{right:22%;animation-delay:-2s}.box-three{right:33%;animation-delay:-4s}.factory-forklift{position:absolute;right:48%;top:59%;width:80px;height:30px;border:3px solid var(--scene);border-left-width:9px;border-radius:7px 9px 3px 3px;background:color-mix(in srgb,var(--scene) 30%,transparent);animation:scene-forklift 11s ease-in-out infinite}.factory-forklift b{position:absolute;right:-15px;top:-21px;height:22px;width:4px;background:var(--scene)}.factory-forklift i{position:absolute;bottom:-11px;left:8px;width:16px;height:16px;border:4px solid var(--scene);background:#153436;border-radius:50%;animation:scene-wheel .8s linear infinite}.factory-forklift i:last-child{left:55px}
+.transport-road{position:absolute;left:-4%;right:-4%;bottom:25%;height:100px;background:rgba(30,93,118,.22);border-block:2px solid var(--scene);transform:rotate(-5deg);box-shadow:0 0 35px color-mix(in srgb,var(--scene) 15%,transparent)}.transport-road i{position:absolute;top:47px;width:72px;height:5px;background:var(--scene);animation:scene-road 1.2s linear infinite}.transport-road i:nth-child(1){left:0}.transport-road i:nth-child(2){left:18%;animation-delay:-.2s}.transport-road i:nth-child(3){left:36%;animation-delay:-.4s}.transport-road i:nth-child(4){left:54%;animation-delay:-.6s}.transport-road i:nth-child(5){left:72%;animation-delay:-.8s}.transport-road i:nth-child(6){left:90%;animation-delay:-1s}.transport-route{position:absolute;border:2px dashed var(--scene);border-radius:50%;opacity:.55;transform:rotate(-18deg)}.route-one{right:15%;top:22%;width:34%;height:26%}.route-two{left:9%;top:35%;width:30%;height:22%;animation:scene-route-pulse 5s ease-in-out infinite}.transport-truck{position:absolute;left:-190px;top:48%;width:160px;height:62px;animation:scene-drive 12s linear infinite;filter:drop-shadow(0 0 12px color-mix(in srgb,var(--scene) 30%,transparent))}.transport-truck b{position:absolute;left:0;bottom:12px;width:103px;height:42px;border:2px solid var(--scene);border-radius:5px;background:color-mix(in srgb,var(--scene) 32%,#16333b)}.transport-truck span{position:absolute;left:105px;bottom:12px;width:48px;height:34px;background:var(--scene);clip-path:polygon(0 0,64% 0,100% 42%,100% 100%,0 100%)}.transport-truck i{position:absolute;z-index:2;bottom:0;left:20px;width:23px;height:23px;border:5px solid var(--scene);border-radius:50%;background:#10282d;animation:scene-wheel .7s linear infinite}.transport-truck i:last-child{left:118px}.truck-two{top:61%;animation-duration:17s;animation-delay:-8s;transform:scale(.72);opacity:.75}.transport-pin{position:absolute;border:2px solid var(--scene);border-radius:50% 50% 50% 0;padding:10px;color:var(--scene);font-weight:900;transform:rotate(-45deg);box-shadow:0 0 20px var(--scene)}.pin-one{left:13%;top:27%}.pin-two{right:15%;top:56%}
+.broker-wire{position:absolute;height:3px;background:repeating-linear-gradient(90deg,var(--scene) 0 9px,transparent 9px 17px);transform-origin:left;filter:drop-shadow(0 0 7px var(--scene));animation:scene-wire-flow 1s linear infinite}.wire-one{left:17%;top:43%;width:34%;transform:rotate(5deg)}.wire-two{left:50%;top:45%;width:35%;transform:rotate(-5deg)}.wire-three{left:21%;top:68%;width:60%;transform:rotate(-12deg);opacity:.45}.broker-node{position:absolute;width:92px;height:92px;border:2px solid var(--scene);border-radius:20px;background:rgba(9,32,42,.78);color:var(--scene);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;box-shadow:0 0 28px color-mix(in srgb,var(--scene) 28%,transparent);animation:scene-node-float 2.5s ease-in-out infinite}.broker-node small{font-size:10px;font-weight:900;letter-spacing:.17em}.broker-load{left:13%;top:30%}.broker-match{left:calc(50% - 46px);top:37%;animation-delay:-.8s}.broker-fleet{right:12%;top:30%;animation-delay:-1.6s}.broker-packet{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--scene);box-shadow:0 0 18px 4px var(--scene);animation:scene-packet 4s linear infinite}.packet-one{left:20%;top:42%}.packet-two{left:50%;top:45%;animation-delay:-1.3s}.packet-three{left:72%;top:42%;animation-delay:-2.6s}.scene-caption{position:absolute;right:4%;bottom:8%;font-size:12px;font-weight:900;letter-spacing:.22em;color:var(--scene);opacity:.85;text-shadow:0 0 18px var(--scene)}
+/* Keep scene visible behind, not on top of the app UI. */
+#root{position:relative;z-index:1;isolation:isolate}#root>*,#root .workspace-page,#root .broker-workspace,#root .transporter-workspace{background-color:transparent}.scene-feature-loads .factory-belt,.scene-feature-matches .broker-wire,.scene-feature-bookings .broker-node,.scene-feature-shipments .transport-route{opacity:1;filter:drop-shadow(0 0 10px var(--scene))}
+@keyframes scene-grid-move{to{background-position:42px 42px}}@keyframes scene-orb-float{to{transform:translate(-5vw,5vh) scale(1.12)}}@keyframes scene-smoke{0%{transform:translateY(10px) scale(.5);opacity:0}35%{opacity:.8}100%{transform:translateY(-35px) scale(1.8);opacity:0}}@keyframes scene-belt{to{transform:translateX(12px)}}@keyframes scene-box-travel{0%{transform:translateX(-35px);opacity:.25}20%,80%{opacity:1}100%{transform:translateX(120px);opacity:.15}}@keyframes scene-forklift{0%,100%{right:48%}50%{right:32%}}@keyframes scene-wheel{to{transform:rotate(360deg)}}@keyframes scene-road{to{transform:translateX(-95px)}}@keyframes scene-route-pulse{50%{opacity:.95;transform:rotate(-18deg) scale(1.08)}}@keyframes scene-drive{to{left:calc(100% + 200px)}}@keyframes scene-wire-flow{to{background-position:34px 0}}@keyframes scene-node-float{50%{transform:translateY(-12px)}}@keyframes scene-packet{0%{transform:translate(0,0);opacity:0}15%{opacity:1}100%{transform:translate(30vw,4vh);opacity:0}}
+@media(max-width:760px){.loadsetu-scene{opacity:.75}.factory-shed{right:4%;transform:scale(.7);transform-origin:right top}.factory-belt{right:2%;width:58%}.broker-node{transform:scale(.72)}.scene-caption{font-size:9px;right:3%;bottom:4%}}
+@media(prefers-reduced-motion:reduce){.loadsetu-scene *{animation:none!important}}
+
+/* Stronger role-specific scenes for transporter and broker dashboards. */
+.loadsetu-route-layer{position:relative;z-index:2;min-height:100vh}
+.loadsetu-scene{z-index:0;opacity:1;contain:paint}
+/* Keep actual dashboard surfaces translucent so the animated scene can be seen through the page. */
+.td-page,.td-shell,.td-dashboard,.bd-page,.bd-shell,.bd-dashboard,.broker-dashboard,.transporter-dashboard,.factory-dashboard{position:relative;z-index:1;background:transparent!important}
+.td-hero,.bd-hero{background:linear-gradient(115deg,rgba(15,54,64,.72),rgba(13,38,45,.48))!important;backdrop-filter:blur(8px)}
+.td-card,.bd-card,.td-metric,.bd-match-card{background:rgba(17,57,59,.84)!important;backdrop-filter:blur(7px);border-color:color-mix(in srgb,var(--scene,#65dfff) 24%,#2a5556)!important}
+.scene-transporter .transport-road{bottom:18%;height:118px;background:rgba(23,90,118,.45);border-block:3px solid #79e4ff;box-shadow:0 0 44px rgba(70,207,255,.24)}
+.scene-transporter .transport-road i{height:6px;width:88px;background:#d4f7ff;box-shadow:0 0 14px #69ddff;animation-duration:.85s}
+.scene-transporter .transport-truck{top:56%;transform:scale(1.18);filter:drop-shadow(0 0 18px rgba(90,220,255,.6));animation-duration:9s}
+.scene-transporter .truck-two{top:68%;transform:scale(.88);animation-duration:14s;animation-delay:-5s}
+.scene-transporter .transport-route{border-width:3px;opacity:.8;box-shadow:0 0 18px rgba(105,221,255,.25)}
+.scene-transporter .transport-pin{background:rgba(6,35,47,.88);box-shadow:0 0 28px #69ddff;animation:scene-node-float 2.5s ease-in-out infinite}
+.scene-broker .broker-wire{height:4px;background:repeating-linear-gradient(90deg,#e0c4ff 0 12px,transparent 12px 22px);filter:drop-shadow(0 0 9px #d6a6ff);animation-duration:.65s}
+.scene-broker .broker-node{width:108px;height:108px;border-width:2px;background:rgba(33,22,58,.9);box-shadow:0 0 35px rgba(214,166,255,.35),inset 0 0 22px rgba(214,166,255,.12)}
+.scene-broker .broker-node svg{width:34px;height:34px}
+.scene-broker .broker-load{left:12%;top:28%}.scene-broker .broker-match{left:calc(50% - 54px);top:39%}.scene-broker .broker-fleet{right:12%;top:28%}
+.scene-broker .broker-packet{width:15px;height:15px;background:#f1d9ff;box-shadow:0 0 0 6px rgba(214,166,255,.18),0 0 25px 8px #d6a6ff;animation-duration:3s}
+.scene-broker .packet-one{left:18%;top:41%}.scene-broker .packet-two{left:49%;top:46%;animation-delay:-1s}.scene-broker .packet-three{left:76%;top:42%;animation-delay:-2s}
+.scene-broker .scene-orb{opacity:.22}.scene-transporter .scene-orb{opacity:.2}
+@media(max-width:760px){.scene-transporter .transport-truck{top:57%;transform:scale(.78)}.scene-transporter .truck-two{top:70%;transform:scale(.6)}.scene-broker .broker-node{transform:scale(.72)}.scene-broker .broker-match{left:calc(50% - 54px)}}
+
+
+/* Visibility and stacking correction: keep role scenes above the body background,
+   but below every interactive dashboard element. */
+html, body { min-height:100%; }
+body { background-color:#092a29; }
+#root { position:relative; isolation:isolate; min-height:100vh; background:transparent!important; }
+.loadsetu-scene { position:fixed!important; inset:0!important; z-index:0!important; opacity:1!important; pointer-events:none!important; overflow:hidden!important; }
+.loadsetu-route-layer { position:relative!important; z-index:1!important; min-height:100vh; background:transparent!important; }
+.loadsetu-route-layer > * { position:relative; z-index:1; }
+/* Dashboard wrappers in the current project must not paint an opaque full-page layer. */
+.td-page,.td-shell,.td-dashboard,.td-main,.td-content,
+.bd-page,.bd-shell,.bd-dashboard,.bd-main,.bd-content,
+.transporter-workspace,.broker-workspace,.workspace-page,
+.factory-dashboard,.factory-workspace { background-color:transparent!important; }
+.td-hero,.bd-hero { background:linear-gradient(110deg,rgba(12,49,56,.64),rgba(12,38,45,.38))!important; backdrop-filter:blur(5px); }
+/* Make moving truck scene unmistakable. */
+.scene-transporter .transport-road { bottom:20%!important; height:126px!important; background:rgba(18,91,122,.52)!important; border-block:3px solid #77e6ff!important; box-shadow:0 0 42px rgba(70,207,255,.34)!important; }
+.scene-transporter .transport-road i { height:7px!important; width:92px!important; background:#e3fbff!important; box-shadow:0 0 16px #69ddff!important; animation-duration:.72s!important; }
+.scene-transporter .transport-truck { top:52%!important; transform:scale(1.32)!important; filter:drop-shadow(0 0 22px rgba(90,220,255,.75))!important; animation-duration:8s!important; }
+.scene-transporter .truck-two { top:66%!important; transform:scale(.92)!important; animation-duration:12s!important; animation-delay:-5s!important; }
+.scene-transporter .transport-route { border:3px dashed #8cecff!important; opacity:.95!important; filter:drop-shadow(0 0 8px #69ddff); }
+.scene-transporter .transport-pin { color:#e9fbff!important; background:rgba(5,35,48,.95)!important; border-color:#69ddff!important; box-shadow:0 0 26px #69ddff!important; }
+/* Make broker's matching flow visible across the screen. */
+.scene-broker .broker-wire { height:4px!important; background:repeating-linear-gradient(90deg,#efd9ff 0 12px,transparent 12px 21px)!important; filter:drop-shadow(0 0 10px #d6a6ff)!important; animation:scene-wire-flow .55s linear infinite!important; opacity:1!important; }
+.scene-broker .broker-node { width:104px!important; height:104px!important; border:2px solid #e2c5ff!important; background:rgba(34,21,58,.92)!important; color:#f6eaff!important; box-shadow:0 0 32px rgba(214,166,255,.55),inset 0 0 22px rgba(214,166,255,.18)!important; }
+.scene-broker .broker-load { left:12%!important; top:28%!important; }
+.scene-broker .broker-match { left:calc(50% - 52px)!important; top:40%!important; }
+.scene-broker .broker-fleet { right:12%!important; top:28%!important; }
+.scene-broker .broker-packet { width:15px!important; height:15px!important; background:#fff0ff!important; box-shadow:0 0 0 7px rgba(214,166,255,.25),0 0 28px 9px #d6a6ff!important; animation:scene-packet 3.1s linear infinite!important; opacity:1!important; }
+.scene-broker .scene-orb,.scene-transporter .scene-orb { opacity:.22!important; }
+/* Keep the animated backdrop from reducing contrast or intercepting clicks. */
+.loadsetu-scene svg { filter:drop-shadow(0 0 5px currentColor); }
+@media (max-width:760px) {
+  .scene-transporter .transport-truck { top:56%!important; transform:scale(.82)!important; }
+  .scene-transporter .truck-two { top:68%!important; transform:scale(.62)!important; }
+  .scene-broker .broker-node { width:76px!important;height:76px!important; }
+  .scene-broker .broker-match { left:calc(50% - 38px)!important; }
+}
+
+
+/* Final stacking fix: scene is a root-level sibling of the route layer.
+   Keep it above the root canvas, but below all dashboard controls. */
+#root { position: relative !important; isolation: isolate !important; background: transparent !important; }
+#root > .loadsetu-scene { position: fixed !important; inset: 0 !important; z-index: 0 !important; display: block !important; visibility: visible !important; opacity: 1 !important; }
+#root > .loadsetu-route-layer { position: relative !important; z-index: 1 !important; background: transparent !important; }
+.loadsetu-route-layer > * { position: relative; z-index: 1; }
+.loadsetu-route-layer .transporter-workspace,
+.loadsetu-route-layer .broker-workspace { background: transparent !important; }
+.loadsetu-route-layer .transporter-workspace::before,
+.loadsetu-route-layer .broker-workspace::before { background: linear-gradient(135deg, rgba(8,35,37,.14), rgba(8,35,37,.03) 48%, rgba(8,35,37,.16)) !important; }
+html[data-theme="dark"] .scene-transporter .transport-road { opacity: 1 !important; }
+html[data-theme="dark"] .scene-transporter .transport-truck { opacity: 1 !important; }
+html[data-theme="dark"] .scene-broker .broker-wire,
+html[data-theme="dark"] .scene-broker .broker-node,
+html[data-theme="dark"] .scene-broker .broker-packet { opacity: 1 !important; }

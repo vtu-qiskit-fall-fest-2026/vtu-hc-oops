@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { requireAuth } from "../middleware/auth.js";
+import { getLoadLiveLocation, getTransporterOverview, updateTransporterBooking, updateTransporterLocation } from "../controllers/transporterController.js";
+const router = Router();
+router.use(requireAuth);
+router.get("/overview", getTransporterOverview);
+router.patch("/bookings/:bookingId", updateTransporterBooking);
+router.patch("/bookings/:bookingId/location", updateTransporterLocation);
+router.get("/loads/:loadId/location", getLoadLiveLocation);
+export default router;
