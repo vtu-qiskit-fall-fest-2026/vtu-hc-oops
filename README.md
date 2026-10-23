@@ -40,6 +40,8 @@ solved both exactly (classical) and with **QAOA on Qiskit**, side by side.
 | 2 | Prasanna Padatare | [PixiePewds](https://github.com/PixiePewds) | Developer |
 | 3 | Tushar Deshmukh | [Tushar-Deshmukh-0019](https://github.com/Tushar-Deshmukh-0019) | Developer |
 
+| link | | [LoadSetu](https://qiskit-hackthone-vtu-belagavi-2.onrender.com/) | |
+
 ---
 
 ## Problem
