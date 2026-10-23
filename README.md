@@ -151,9 +151,9 @@ Open **http://localhost:5173**. No database, `.env` or API key is needed. With n
 
 | Role (pick on the login form) | Email |
 | :--- | :--- |
-| Goods owner | `factory@demo.loadsetu.in` |
-| Transporter | `transporter1@demo.loadsetu.in`, `transporter2@demo.loadsetu.in` |
-| Broker | `broker@demo.loadsetu.in` |
+| Goods owner | `yashgaikwad@gmial.com`, `Yash@123` |
+| Transporter | `yashgaikwad3295@gmial.com`, `Yash@123` |
+| Broker | `yashgaikwad5516@gmial.com`, `Yash@123` |
 
 Go to **Factory dashboard → Quantum fleet optimizer**, then press **Run QAOA**. Switch to *IBM Brisbane noise* and run again to compare.
 
