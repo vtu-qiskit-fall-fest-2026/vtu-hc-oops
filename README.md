@@ -36,10 +36,9 @@ solved both exactly (classical) and with **QAOA on Qiskit**, side by side.
 
 | # | Name | GitHub username | Role |
 | :-- | :--- | :--- | :--- |
-| 1 | _Add your name_ | _your-github-username_ | _Team Lead_ |
-| 2 | _Add your name_ | _your-github-username_ | _Developer_ |
-| 3 | _Add your name_ | _your-github-username_ | _Developer_ |
-| 4 | _Add your name_ | _your-github-username_ | _Developer_ |
+| 1 | Yash Gaikwad | [yash-kitcoek](https://github.com/yash-kitcoek) | Team Lead |
+| 2 | Prasanna Padatare | [PixiePewds](https://github.com/PixiePewds) | Developer |
+| 3 | Tushar Deshmukh | [Tushar-Deshmukh-0019](https://github.com/Tushar-Deshmukh-0019) | Developer |
 
 ---
 
